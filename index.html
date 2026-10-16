@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Youssef Fahmy · Robotics &amp; Automation Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<meta name="description" content="Youssef Fahmy, Mechanical Engineering (Robotics &amp; Automation) student at GIU Cairo, bachelor's thesis at TUM Campus Heilbronn. Projects in manipulation, path planning, computer vision and control.">
+<meta property="og:title" content="Youssef Fahmy · Robotics &amp; Automation">
+<meta property="og:description" content="Youssef Fahmy, Mechanical Engineering (Robotics &amp; Automation) student at GIU Cairo, bachelor's thesis at TUM Campus Heilbronn. Projects in manipulation, path planning, computer vision and control.">
+<meta property="og:image" content="https://yousseffahmy05.github.io/media/me.jpg">
+<meta property="og:url" content="https://yousseffahmy05.github.io/">
+<meta name="theme-color" content="#05060b">
+<style>html,body{margin:0;background:#05060b}</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* Layout: neon circuit board. Hero = live PCB traces with signal pulses routed into a central chip that
+   holds the decoding name; JSON spec block typed on scroll; neon project cards that tilt, glow and open a
+   pop-up; an interactive terminal; the thesis as an SVG circuit with travelling signals; git-log timeline. */
+:root {
+  color-scheme: dark;
+  --bg: #05060b;
+  --panel: #0a0c15;
+  --panel-2: #0f1220;
+  --line: rgba(0, 229, 255, .14);
+  --line-2: rgba(0, 229, 255, .28);
+  --fg: #e6f6ff;
+  --muted: #8a93aa;
+  --faint: #545c72;
+  --cyan: #00e5ff;
+  --mag: #ff2bd6;
+  --lime: #c6ff3d;
+  --f-sans: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --maxw: 1200px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --ease: cubic-bezier(.2,.8,.2,1);
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 80px; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 70; background: repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px); }
+a { color: inherit; }
+::selection { background: var(--mag); color: #fff; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.wrap { position: relative; max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gutter); }
+.mono { font-family: var(--f-mono); }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(34px, 5vw, 62px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 600; }
+h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+p { margin: 0; }
+.section { padding-block: clamp(90px, 11vw, 150px); position: relative; }
+.path { font-family: var(--f-mono); font-size: 13px; color: var(--cyan); letter-spacing: .02em; }
+.path::before { content: "~/youssef"; color: var(--faint); }
+.head { display: grid; gap: 16px; margin-bottom: clamp(32px, 5vw, 56px); max-width: 760px; }
+.head p { color: var(--muted); font-size: 17px; max-width: 54ch; }
+.neon { color: var(--cyan); text-shadow: 0 0 8px rgba(0,229,255,.7), 0 0 26px rgba(0,229,255,.45); }
+.neon-m { color: var(--mag); text-shadow: 0 0 8px rgba(255,43,214,.7), 0 0 26px rgba(255,43,214,.45); }
+.js .flick.in { animation: flick 1.4s steps(1) 1; }
+@keyframes flick { 0%,8%,14%,30% { opacity: 1; } 5%,11%,22% { opacity: .2; } }
+
+/* reveal */
+.js .rv { opacity: 0; transform: translateY(32px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .rv.d1 { transition-delay: .08s; } .js .rv.d2 { transition-delay: .16s; } .js .rv.d3 { transition-delay: .24s; }
+
+/* nav */
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 60; padding-block: 14px; background: linear-gradient(180deg, rgba(5,6,11,.9), rgba(5,6,11,0)); transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
+.nav.scrolled { background: rgba(5,6,11,.92); border-bottom-color: var(--line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.nav-in { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.brand { font-family: var(--f-mono); font-weight: 700; text-decoration: none; font-size: 14px; letter-spacing: .04em; white-space: nowrap; }
+.brand span { color: var(--mag); }
+.links { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; font-family: var(--f-mono); font-size: 13px; }
+.links a { display: block; padding: 7px 12px; text-decoration: none; color: var(--muted); border: 1px solid transparent; transition: all .2s; }
+.links a:hover, .links a.active { color: var(--cyan); border-color: var(--line-2); box-shadow: 0 0 16px -4px var(--cyan) inset; }
+@media (max-width: 860px) { .links { display: none; } }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; font-family: var(--f-mono); font-weight: 500; font-size: 14px; text-decoration: none; cursor: pointer; white-space: nowrap; border: 1px solid var(--cyan); color: var(--cyan); background: rgba(0,229,255,.05); transition: background .2s, color .2s, box-shadow .2s; }
+.btn:hover { background: var(--cyan); color: #001014; box-shadow: 0 0 30px var(--cyan); }
+.btn.m { border-color: var(--mag); color: var(--mag); background: rgba(255,43,214,.05); }
+.btn.m:hover { background: var(--mag); color: #fff; }
+
+/* hero */
+.hero { position: relative; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding-block: 100px 70px; }
+#pcb { position: absolute; inset: 0; width: 100%; height: 100%; }
+.chip { position: relative; z-index: 2; text-align: center; padding: clamp(26px, 4vw, 48px) clamp(18px, 4vw, 56px); background: rgba(5,6,11,.82); border: 1px solid var(--line-2); box-shadow: 0 0 0 1px rgba(0,229,255,.06), 0 0 60px -10px rgba(0,229,255,.35); max-width: min(920px, 92vw); backdrop-filter: blur(3px); }
+.chip::before, .chip::after { content: ""; position: absolute; width: 18px; height: 18px; border: 2px solid var(--mag); }
+.chip::before { left: -2px; top: -2px; border-right: 0; border-bottom: 0; }
+.chip::after { right: -2px; bottom: -2px; border-left: 0; border-top: 0; }
+.chip .id { font-family: var(--f-mono); font-size: 12px; color: var(--faint); letter-spacing: .1em; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.chip .id b { color: var(--lime); font-weight: 500; }
+.chip h1 { margin-top: 16px; font-size: clamp(46px, 9vw, 124px); line-height: .92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; }
+.chip h1 .l2 { display: block; color: transparent; -webkit-text-stroke: 1.5px var(--cyan); filter: drop-shadow(0 0 10px rgba(0,229,255,.55)); }
+.typed { margin-top: 20px; font-family: var(--f-mono); font-size: clamp(14px, 1.6vw, 17px); color: var(--muted); min-height: 1.6em; }
+.typed .p { color: var(--mag); }
+.caret { display: inline-block; width: .6em; height: 1.1em; background: var(--cyan); vertical-align: -0.15em; margin-left: 2px; animation: blink 1s steps(2) infinite; box-shadow: 0 0 10px var(--cyan); }
+@keyframes blink { 50% { opacity: 0; } }
+.chip .ctas { margin-top: 26px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.avail { position: absolute; left: 0; right: 0; bottom: 22px; z-index: 2; display: flex; justify-content: center; }
+.avail span { font-family: var(--f-mono); font-size: 12.5px; padding: 6px 12px; border: 1px solid rgba(198,255,61,.35); color: var(--lime); background: rgba(5,6,11,.8); letter-spacing: .04em; text-align: center; }
+
+/* about json */
+.about { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(26px, 5vw, 72px); align-items: start; }
+@media (max-width: 900px) { .about { grid-template-columns: 1fr; } }
+.about .copy { display: grid; gap: 16px; color: var(--muted); font-size: 17px; }
+.about .copy b { color: var(--fg); font-weight: 500; }
+.about .me-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 22px; align-items: start; }
+.about .me { margin: 4px 0 0; display: grid; gap: 8px; }
+.about .me img { display: block; width: 100%; aspect-ratio: 4 / 5; height: auto; object-fit: cover; border: 1px solid rgba(198,255,61,.45); box-shadow: 0 0 0 4px rgba(198,255,61,.06), 0 0 28px -6px rgba(0,229,255,.35); }
+.about .me figcaption { font-family: var(--f-mono); font-size: 11.5px; color: var(--lime); letter-spacing: .04em; }
+@media (max-width: 520px) { .about .me-row { grid-template-columns: 1fr; } .about .me { width: 150px; } }
+.code { position: relative; background: var(--panel); border: 1px solid var(--line); font-family: var(--f-mono); font-size: 14px; line-height: 1.75; overflow: hidden; min-width: 0; }
+.code .bar { display: flex; align-items: center; gap: 7px; padding: 10px 14px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--faint); }
+.code .bar i { width: 9px; height: 9px; border-radius: 50%; background: #2a2f44; }
+.code .bar i:nth-child(1) { background: var(--mag); } .code .bar i:nth-child(2) { background: var(--lime); } .code .bar i:nth-child(3) { background: var(--cyan); }
+.code pre { margin: 0; padding: 18px 18px 22px; white-space: pre-wrap; word-break: break-word; min-height: 22em; color: var(--fg); }
+.k { color: var(--mag); } .s { color: var(--lime); } .n { color: var(--cyan); } .c { color: var(--faint); } .pn { color: var(--muted); }
+
+/* projects */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+.card { position: relative; text-align: left; font: inherit; color: inherit; background: var(--panel); border: 1px solid var(--line); padding: 22px; cursor: pointer; display: grid; gap: 14px; align-content: start; min-height: 290px; transform-style: preserve-3d; transition: transform .25s var(--ease), border-color .25s; min-width: 0; }
+.card::before { content: ""; position: absolute; inset: -1px; pointer-events: none; opacity: 0; transition: opacity .3s; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(0,229,255,.22), transparent 60%); }
+.card:hover { border-color: var(--line-2); }
+.card:hover::before { opacity: 1; }
+.card.wide { grid-column: span 2; }
+@media (max-width: 640px) { .card.wide { grid-column: auto; } }
+.card .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: 11.5px; color: var(--faint); letter-spacing: .06em; }
+.card .top b { color: var(--cyan); font-weight: 500; }
+.card svg.sch { width: 100%; height: auto; max-height: 150px; overflow: visible; }
+.card svg.sch * { fill: none; stroke: var(--cyan); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.card svg.sch .lk { stroke-width: 2.6; }
+.card svg.sch .m { stroke: var(--mag); }
+.card svg.sch .l { stroke: var(--lime); }
+.card svg.sch .faint { stroke-opacity: .35; }
+.card svg.sch .faint2 { stroke-opacity: .45; }
+.card svg.sch .ds { stroke-dasharray: 4 4; }
+.card svg.sch .fm { fill: rgba(255,43,214,.25); }
+.card svg.sch .ob { fill: rgba(0,229,255,.16); }
+.card svg.sch .ex { fill: rgba(0,229,255,.35); stroke: none; }
+.card svg.sch .dot { fill: var(--cyan); stroke: none; }
+.card svg.sch .dotl { fill: var(--lime); stroke: none; }
+.card svg.sch text { stroke: none; fill: var(--muted); font-family: var(--f-mono); font-size: 8.5px; letter-spacing: .02em; }
+.card svg.sch text.tl { fill: var(--lime); }
+.card svg.sch text.tm { fill: var(--mag); }
+.card svg.sch text.big { font-size: 15px; font-weight: 700; }
+.card svg.sch .flow { animation: schflow 1.4s linear infinite; }
+@keyframes schflow { to { stroke-dashoffset: -16; } }
+@media (prefers-reduced-motion: reduce) { .card svg.sch .flow { animation: none; } }
+.card svg.sch.sm { display: none; }
+@media (max-width: 640px) { .card svg.sch.lg { display: none; } .card svg.sch.sm { display: block; } }
+.card h3 { font-size: 21px; line-height: 1.2; }
+.card p { color: var(--muted); font-size: 14.5px; }
+.card .metric { font-family: var(--f-mono); font-size: 13px; color: var(--lime); }
+.card .open { font-family: var(--f-mono); font-size: 12px; color: var(--mag); margin-top: auto; }
+
+/* modal */
+.modal { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 16px; background: rgba(2,3,8,.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity .3s; }
+.modal.open { opacity: 1; pointer-events: auto; }
+.mbox { position: relative; width: min(720px, 100%); max-height: calc(100svh - 32px); overflow: auto; background: var(--panel); border: 1px solid var(--cyan); box-shadow: 0 0 60px -10px rgba(0,229,255,.5); padding: clamp(22px, 4vw, 36px); transform: scale(.94) translateY(16px); transition: transform .4s var(--ease); }
+.modal.open .mbox { transform: none; }
+.mbox .close { position: absolute; right: 12px; top: 12px; width: 38px; height: 38px; background: transparent; border: 1px solid var(--line-2); color: var(--fg); cursor: pointer; font-family: var(--f-mono); }
+.mbox .close:hover { border-color: var(--mag); color: var(--mag); }
+.mbox .tag { font-family: var(--f-mono); font-size: 12px; color: var(--cyan); letter-spacing: .06em; padding-right: 48px; }
+.mbox h3 { margin-top: 12px; font-size: clamp(24px, 3vw, 32px); line-height: 1.15; }
+.mbox dl { margin: 20px 0 0; display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px 18px; }
+.mbox dt { font-family: var(--f-mono); font-size: 12px; color: var(--mag); padding-top: 2px; }
+.mbox dd { margin: 0; color: var(--muted); }
+@media (max-width: 520px) { .mbox dl { grid-template-columns: 1fr; gap: 2px; } .mbox dd { margin-bottom: 10px; } }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.chip-s { font-family: var(--f-mono); font-size: 12px; padding: 4px 9px; border: 1px solid var(--line-2); color: var(--muted); white-space: nowrap; }
+.mbox a.more { display: inline-block; margin-top: 16px; font-family: var(--f-mono); font-size: 13px; color: var(--lime); }
+
+/* terminal */
+.term { background: #04050a; border: 1px solid var(--line-2); box-shadow: 0 0 80px -30px rgba(0,229,255,.5); font-family: var(--f-mono); font-size: 14px; }
+.term .bar { display: flex; justify-content: space-between; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--faint); }
+.term .out { height: 320px; overflow-y: auto; padding: 16px 18px 6px; line-height: 1.65; white-space: pre-wrap; word-break: break-word; }
+.term .out .p { color: var(--mag); } .term .out .o { color: var(--muted); } .term .out .h { color: var(--cyan); } .term .out .g { color: var(--lime); }
+.term form { display: flex; align-items: center; gap: 10px; padding: 8px 18px 16px; }
+.term label { color: var(--mag); white-space: nowrap; }
+.term input { flex: 1; min-width: 0; background: transparent; border: 0; outline: none; color: var(--fg); font: inherit; caret-color: var(--cyan); }
+.cmds { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.cmds button { font-family: var(--f-mono); font-size: 12.5px; padding: 6px 11px; background: transparent; border: 1px solid var(--line-2); color: var(--cyan); cursor: pointer; }
+.cmds button:hover { background: rgba(0,229,255,.1); }
+
+/* thesis circuit */
+.thesis-t { font-size: clamp(20px, 2.2vw, 27px); line-height: 1.3; font-weight: 500; letter-spacing: -0.015em; max-width: 34ch; }
+.thesis-l { margin-top: 16px; color: var(--muted); max-width: 64ch; font-size: 16.5px; }
+.circuit { margin-top: clamp(30px, 4vw, 48px); background: var(--panel); border: 1px solid var(--line); padding: clamp(10px, 2vw, 22px); }
+.circuit svg { display: block; width: 100%; height: auto; }
+.circuit .tr { fill: none; stroke: rgba(0,229,255,.35); stroke-width: 2; }
+.circuit .flow { fill: none; stroke: var(--cyan); stroke-width: 2; stroke-dasharray: 6 14; animation: flow 1.2s linear infinite; filter: drop-shadow(0 0 4px var(--cyan)); }
+@keyframes flow { to { stroke-dashoffset: -20; } }
+.circuit .box { fill: #070912; stroke: var(--cyan); stroke-width: 1.5; }
+.circuit .box.m { stroke: var(--mag); }
+.circuit .bt { font-family: var(--f-mono); font-size: 11px; fill: #8a93aa; letter-spacing: .08em; }
+.circuit .bn { font-family: var(--f-sans); font-size: 16px; font-weight: 600; fill: #e6f6ff; }
+.circuit .bd { font-family: var(--f-sans); font-size: 12.5px; fill: #8a93aa; }
+.circuit .sig { fill: var(--lime); filter: drop-shadow(0 0 6px var(--lime)); }
+.circuit .pin { fill: var(--cyan); }
+.vlist { display: none; }
+@media (max-width: 760px) { .circuit { display: none; } .vlist { display: grid; gap: 10px; margin-top: 28px; } }
+.vlist div { border: 1px solid var(--line); background: var(--panel); padding: 14px 16px; border-left: 3px solid var(--cyan); }
+.vlist b { display: block; font-weight: 600; } .vlist span { color: var(--muted); font-size: 14px; }
+.vlist .k2 { font-family: var(--f-mono); font-size: 11px; color: var(--faint); letter-spacing: .1em; text-transform: uppercase; }
+
+/* git log */
+.log { position: relative; display: grid; gap: 0; }
+.commit { position: relative; display: grid; grid-template-columns: 34px 150px minmax(0, 1fr); gap: 0 16px; padding: 18px 0; border-bottom: 1px dashed var(--line); }
+.commit::before { content: ""; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: rgba(0,229,255,.35); }
+.commit:first-child::before { top: 31px; }
+.commit:last-child::before { bottom: auto; height: 31px; }
+.commit .node { position: relative; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--cyan); background: var(--bg); margin-top: 2px; box-shadow: 0 0 12px -2px var(--cyan); }
+.commit.tip .node { border-color: var(--lime); box-shadow: 0 0 14px var(--lime); }
+.commit .when { font-family: var(--f-mono); font-size: 12.5px; color: var(--cyan); padding-top: 3px; }
+.commit .when span { display: block; color: var(--faint); }
+.commit h3 { font-size: 19px; }
+.commit h3 .ref { font-family: var(--f-mono); font-size: 11px; font-weight: 500; color: var(--lime); border: 1px solid rgba(198,255,61,.4); padding: 1px 6px; margin-left: 8px; vertical-align: 3px; }
+.commit .org { font-size: 15px; color: var(--fg); opacity: .8; }
+.commit p { color: var(--muted); font-size: 14.5px; margin-top: 6px; }
+@media (max-width: 640px) { .commit { grid-template-columns: 34px minmax(0, 1fr); } .commit .when { grid-column: 2; } .commit > div:last-child { grid-column: 2; } }
+.stack { margin-top: clamp(40px, 6vw, 70px); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.stack .col { background: var(--panel); border: 1px solid var(--line); padding: 18px; }
+.stack .col h3 { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mag); font-weight: 500; }
+.stack .chips { margin-top: 12px; }
+
+/* contact */
+.contact { text-align: center; display: grid; justify-items: center; gap: 22px; }
+.contact h2 { font-size: clamp(48px, 9vw, 128px); line-height: .95; letter-spacing: -0.05em; text-transform: uppercase; font-weight: 700; }
+.contact h2 .o { color: transparent; -webkit-text-stroke: 2px var(--mag); filter: drop-shadow(0 0 12px rgba(255,43,214,.6)); }
+.contact p { color: var(--muted); max-width: 56ch; font-size: 17px; }
+.contact p b { color: var(--fg); font-weight: 500; }
+.rows { width: min(760px, 100%); display: grid; gap: 10px; text-align: left; }
+.row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); background: var(--panel); font-family: var(--f-mono); font-size: 14px; min-width: 0; text-decoration: none; transition: border-color .2s, box-shadow .2s; }
+.row:hover { border-color: var(--cyan); box-shadow: 0 0 24px -8px var(--cyan); }
+.row .k3 { color: var(--mag); margin-right: 12px; }
+.row .v { overflow-wrap: anywhere; }
+.row button { flex: none; font-family: var(--f-mono); font-size: 12px; padding: 6px 12px; background: transparent; border: 1px solid var(--cyan); color: var(--cyan); cursor: pointer; }
+footer { border-top: 1px solid var(--line); padding-block: 26px; font-family: var(--f-mono); font-size: 12px; color: var(--faint); }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+footer b { color: var(--cyan); font-weight: 400; font-variant-numeric: tabular-nums; }
+.toast { position: fixed; left: 50%; bottom: 22px; z-index: 90; transform: translate(-50%, calc(100% + 60px)); padding: 10px 16px; background: var(--cyan); color: #001014; font-family: var(--f-mono); font-size: 13px; transition: transform .45s var(--ease); pointer-events: none; }
+.toast.show { transform: translate(-50%, 0); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .rv { opacity: 1 !important; transform: none !important; }
+}
+</style>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">youssef<span>@</span>fahmy:~$</a>
+    <ul class="links">
+      <li><a href="#about">./about</a></li>
+      <li><a href="#projects">./projects</a></li>
+      <li><a href="#terminal">./terminal</a></li>
+      <li><a href="#thesis">./thesis</a></li>
+      <li><a href="#log">./log</a></li>
+    </ul>
+    <a class="btn m" href="#contact" style="padding:9px 14px;font-size:13px">connect()</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <canvas id="pcb" aria-hidden="true"></canvas>
+    <div class="chip">
+      <div class="id"><span>U1 · YF-01</span><span><b>●</b> ROBOTICS &amp; AUTOMATION</span></div>
+      <h1><span class="dec" data-text="Youssef">Youssef</span><span class="l2 dec" data-text="Fahmy">Fahmy</span></h1>
+      <div class="typed"><span class="p">&gt;</span> <span id="typed">building robots that see, plan and move</span><span class="caret" aria-hidden="true"></span></div>
+      <div class="ctas"><a class="btn" href="#projects">./projects</a><a class="btn m" href="#terminal">open terminal</a></div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap about">
+      <div class="rv">
+        <div class="head" style="margin-bottom:22px"><span class="path">/about</span><h2 class="flick rv">Mechanical engineer, <span class="neon">wired for robotics.</span></h2></div>
+        <div class="me-row">
+        <figure class="me"><img src="media/me.jpg" alt="Portrait of Youssef Fahmy" width="591" height="739" loading="lazy"><figcaption>~/youssef</figcaption></figure>
+        <div class="copy">
+          <p>I study <b>Mechanical Engineering – Robotics &amp; Automation</b> at the German International University in Cairo, and I'm writing my <b>bachelor's thesis at TUM Campus Heilbronn</b>.</p>
+          <p>I work across the stack: CAD and 3D-printed parts, kinematics and control, and the planning and perception code that runs on top. The part I enjoy most is getting a system that works in simulation to also work on the real robot.</p>
+        </div>
+        </div>
+      </div>
+      <div class="code rv d1">
+        <div class="bar"><i></i><i></i><i></i><span style="margin-left:8px">youssef.config.js</span></div>
+        <pre id="json" aria-label="Profile summary as code"></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects" style="padding-top:0">
+    <div class="wrap">
+      <div class="head rv"><span class="path">/projects</span><h2 class="flick rv">Builds &amp; <span class="neon-m">experiments.</span></h2><p>Click any card to open the full spec. Team projects are labelled as team projects.</p></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="terminal" style="padding-top:0">
+    <div class="wrap">
+      <div class="head rv"><span class="path">/terminal</span><h2 class="flick rv">Ask the <span class="neon">shell.</span></h2><p>Type <span class="mono neon">help</span>, or tap a command below.</p></div>
+      <div class="term rv d1">
+        <div class="bar"><span>yf-shell — 80×24</span><span>zsh</span></div>
+        <div class="out" id="out" aria-live="polite"></div>
+        <form id="tf" autocomplete="off"><label for="tin">youssef@fahmy:~$</label><input id="tin" type="text" spellcheck="false" aria-label="Terminal command"></form>
+      </div>
+      <div class="cmds rv d2" id="cmds"></div>
+    </div>
+  </section>
+
+  <section class="section" id="thesis" style="padding-top:0">
+    <div class="wrap">
+      <div class="head rv"><span class="path">/thesis</span><h2 class="flick rv">Verified-safe <span class="neon">autonomy.</span></h2></div>
+      <p class="thesis-t rv">Vision-Language Model Grounded Safety Verification for Autonomous Vehicle Navigation Using Temporal Logic and Data-Driven Reachability Analysis</p>
+      <p class="thesis-l rv d1">Bachelor's thesis at TUM Campus Heilbronn, Sep 2026 – Jan 2027. A vision-language model describes the scene; its output is turned into formal temporal-logic rules; reachability analysis checks that a planned motion stays safe before it executes.</p>
+      <div class="circuit rv d2">
+        <svg viewBox="0 70 1100 225" role="img" aria-label="Pipeline: camera frames, vision-language model, temporal-logic specs, Hamilton–Jacobi reachability, verified-safe control.">
+          <path class="tr" id="tr1" d="M 180 150 H 240"/><path class="tr" d="M 400 150 H 460"/><path class="tr" d="M 620 150 H 680"/><path class="tr" d="M 840 150 H 900"/>
+          <path class="tr" d="M 960 210 V 260 H 100 V 210"/>
+          <path class="flow" id="loop" d="M 20 150 H 1080"/>
+          <g id="nodes"></g>
+          <circle class="sig" r="5"><animateMotion dur="5s" repeatCount="indefinite" path="M 20 150 H 1080"/></circle>
+          <circle class="sig" r="4" style="fill:#ff2bd6;filter:drop-shadow(0 0 6px #ff2bd6)"><animateMotion dur="5s" begin="2.5s" repeatCount="indefinite" path="M 20 150 H 1080"/></circle>
+          <text class="bt" x="440" y="282">FEEDBACK · REPLAN IF UNSAFE</text>
+        </svg>
+      </div>
+      <div class="vlist rv">
+        <div><span class="k2">Input</span><b>Camera frames</b><span>What the vehicle sees</span></div>
+        <div><span class="k2">Perception</span><b>Vision-language model</b><span>Scene understanding in language</span></div>
+        <div><span class="k2">Grounding</span><b>Temporal-logic specs</b><span>LTL / STL rules a machine can check</span></div>
+        <div><span class="k2">Verification</span><b>Hamilton–Jacobi reachability</b><span>Can the motion stay in the safe set?</span></div>
+        <div><span class="k2">Output</span><b>Verified-safe control</b><span>Only safe motion executes</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="log" style="padding-top:0">
+    <div class="wrap">
+      <div class="head rv"><span class="path">/log</span><h2 class="flick rv">git log <span class="neon">--experience</span></h2></div>
+      <div class="log">
+        <div class="commit tip rv"><span class="node"></span><div class="when">Sep 2026 –<span>thesis</span></div><div><h3>Bachelor's thesis<span class="ref">HEAD</span></h3><div class="org">TUM Campus Heilbronn</div><p>Safety verification for vision-language-model-guided autonomous navigation.</p></div></div>
+        <div class="commit rv"><span class="node"></span><div class="when">Jul – Aug 2026<span>internship</span></div><div><h3>CAPEX Procurement Intern</h3><div class="org">Beyti (Almarai Group)</div><p>Evaluated fully automated bakery production lines and vendors against a zero-human-contact requirement; PR, RFQ and PO workflows.</p></div></div>
+        <div class="commit rv"><span class="node"></span><div class="when">Aug 2025<span>traineeship</span></div><div><h3>Aftersales Workshop Trainee</h3><div class="org">Global Auto Group · BMW Egypt</div><p>Observed fault diagnosis on BMW vehicles, including OBD-based diagnostics; supported routine brake, oil and fluid maintenance.</p></div></div>
+        <div class="commit rv"><span class="node"></span><div class="when">Jul – Aug 2025<span>internship</span></div><div><h3>Engineering Intern</h3><div class="org">Lantern Ventures (B.Well)</div><p>Contributed to the design of a fitness wearable; sourced cost-effective sensors and evaluated vendors across Asia and the US.</p></div></div>
+        <div class="commit rv"><span class="node"></span><div class="when">Jul – Aug 2024<span>traineeship</span></div><div><h3>Technical Trainee</h3><div class="org">Egyptian Space Agency</div><p>Practical exposure to satellite subsystems and integration workflows.</p></div></div>
+        <div class="commit rv"><span class="node"></span><div class="when">2022 – 2025<span>leadership</span></div><div><h3>Team Leader &amp; Logistics VP · Mentor</h3><div class="org">AIESEC · AMIDEAST</div><p>Led a team and logistics at AIESEC; mentored students through college admissions at AMIDEAST.</p></div></div>
+        <div class="commit rv"><span class="node" style="border-color:var(--mag)"></span><div class="when">Jun 2023 –<span>education</span></div><div><h3>B.Sc. Mechanical Engineering – Robotics &amp; Automation</h3><div class="org">German International University (GIU), Cairo</div><p>GPA 0.74 on the German scale (0.7 = best) · DAAD scholarship.</p></div></div>
+      </div>
+      <div class="stack">
+        <div class="col rv"><h3>// programming</h3><div class="chips"><span class="chip-s">Python</span><span class="chip-s">C (embedded)</span><span class="chip-s">MATLAB</span><span class="chip-s">SQL</span></div></div>
+        <div class="col rv d1"><h3>// robotics</h3><div class="chips"><span class="chip-s">ROS 2 (working knowledge)</span><span class="chip-s">A*</span><span class="chip-s">FK / IK</span><span class="chip-s">PID</span><span class="chip-s">Simulink</span></div></div>
+        <div class="col rv d2"><h3>// vision &amp; ml</h3><div class="chips"><span class="chip-s">Classical CV</span><span class="chip-s">TensorFlow / Keras</span><span class="chip-s">Intro PyTorch</span></div></div>
+        <div class="col rv d3"><h3>// cad &amp; langs</h3><div class="chips"><span class="chip-s">SolidWorks</span><span class="chip-s">Fusion 360</span><span class="chip-s">3D printing</span><span class="chip-s">EN · AR · DE A1</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" style="padding-top:0">
+    <div class="wrap contact">
+      <span class="path rv">/contact</span>
+      <h2 class="rv flick">Let's <span class="o">connect</span></h2>
+      <p class="rv d1">Working on something in <b>robotics, automation or prototyping</b>? I'd be glad to hear about it.</p>
+      <div class="rows rv d2">
+        <div class="row"><div style="min-width:0"><span class="k3">email</span><span class="v" id="email">yousseffahmy_05@outlook.com</span></div><button type="button" id="copyEmail">copy</button></div>
+        <div class="row"><div style="min-width:0"><span class="k3">phone</span><span class="v">+49 160 1551135</span></div></div>
+        <a class="row" href="https://www.linkedin.com/in/youssef-fahmy-029352245" target="_blank" rel="noopener"><div style="min-width:0"><span class="k3">linkedin</span><span class="v">youssef-fahmy-029352245</span></div><span>↗</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><span>© 2026 Youssef Fahmy</span><span>heilbronn <b id="clock">--:--:--</b></span><span>animations are sketches</span></div></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mbox" id="mbox"></div></div>
+<div class="toast" id="toast" role="status">copied</div>
+
+<style>
+/* Shared project-media grid + lightbox (real photos/videos). */
+.pm { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 4px 0 2px; align-items: start; }
+.pm figure { margin: 0; min-width: 0; cursor: zoom-in; display: grid; gap: 6px; }
+.pm figure.wide { grid-column: span 2; }
+.pm .ph { position: relative; height: 190px; border-radius: 12px; overflow: hidden; background: #0b0d12; border: 1px solid rgba(127,127,127,.28); transition: transform .3s, box-shadow .3s; }
+.pm figure:hover .ph, .pm figure:focus-visible .ph { transform: translateY(-2px); box-shadow: 0 14px 30px -18px rgba(0,0,0,.55); }
+.pm figure:focus-visible { outline: none; }
+.pm figure:focus-visible .ph { outline: 2px solid currentColor; outline-offset: 2px; }
+.pm img, .pm video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.pm figure.contain .ph { background: #fff; }
+.pm figure.contain img { object-fit: contain; }
+.pm figcaption { font: 500 12px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; opacity: .72; text-align: left; }
+.pm .vb { position: absolute; top: 8px; left: 8px; font: 700 9.5px/1 system-ui, sans-serif; letter-spacing: .1em; padding: 4px 6px; border-radius: 4px; background: rgba(0,0,0,.62); color: #fff; pointer-events: none; }
+.pm .vb::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #ff4d4d; margin-right: 5px; vertical-align: 0; }
+.pm .zm { position: absolute; right: 8px; bottom: 8px; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: rgba(0,0,0,.55); color: #fff; font: 600 13px/1 system-ui, sans-serif; pointer-events: none; opacity: 0; transition: opacity .2s; }
+.pm figure:hover .zm, .pm figure:focus-visible .zm { opacity: 1; }
+.pm-lb { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; padding: 18px; background: rgba(5,6,10,.9); opacity: 0; pointer-events: none; transition: opacity .25s; }
+.pm-lb.open { opacity: 1; pointer-events: auto; }
+.pm-lb .box { position: relative; max-width: min(1100px, 94vw); max-height: 90vh; display: grid; gap: 10px; justify-items: center; }
+.pm-lb img, .pm-lb video { max-width: 100%; max-height: 80vh; border-radius: 10px; background: #000; display: block; }
+.pm-lb .cap { color: #e8ebf2; font: 500 14px/1.4 system-ui, sans-serif; text-align: center; max-width: 70ch; }
+.pm-lb .x { position: absolute; top: -8px; right: -8px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; color: #000; font-size: 18px; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.4); z-index: 1; }
+@media (max-width: 520px) { .pm { grid-template-columns: 1fr 1fr; gap: 10px; } .pm .ph { height: 140px; } .pm figure.wide, .pm figure:only-child { grid-column: 1 / -1; } .pm figure.wide .ph, .pm figure:only-child .ph { height: 190px; } }
+</style>
+<div class="pm-lb" id="pmLb" role="dialog" aria-modal="true" aria-label="Media viewer"><div class="box"><button class="x" type="button" aria-label="Close">✕</button><div id="pmLbBody"></div><div class="cap" id="pmLbCap"></div></div></div>
+<script>
+window.PM_MEDIA = {
+  ur5e: [
+    { v: 'media/ur5e_real.mp4', poster: 'media/ur5e_real.jpg', cap: 'Real UR5e intercepting the moving object (team demo)', cls: 'portrait' }
+  ],
+  cv: [
+    { i: 'media/cv_confusion.jpg', cap: 'Confusion matrices on the 300-image test set: classical 89% vs CNN 98%', cls: 'wide contain' },
+    { i: 'media/cv_pipeline.jpg', cap: 'CNN training and evaluation pipeline', cls: 'contain' }
+  ],
+  biped: [
+    { i: 'media/plan_astar.jpg', cap: 'My MATLAB simulation: smoothed A* path through the map', cls: 'contain' },
+    { i: 'media/plan_astar2.jpg', cap: 'My MATLAB simulation: smoothed path on the high-resolution map', cls: 'contain' },
+    { i: 'media/biped_team.jpg', cap: 'The team with the robot at the GIU showcase' }
+  ],
+  arm: [
+    { v: 'media/arm_sim.mp4', poster: 'media/arm_sim.jpg', cap: 'Simscape Multibody simulation of a planned joint trajectory' },
+    { i: 'media/arm_cad.jpg', cap: 'SolidWorks CAD model with MG996R servos', cls: 'contain' }
+  ],
+  rotor: [
+    { v: 'media/twinrotor.mp4', poster: 'media/twinrotor.jpg', cap: 'The rig running on hardware (I\'m on the right)' },
+    { i: 'media/rotor_step.jpg', cap: 'Simulated closed-loop response to a 0.35 rad (20°) step', cls: 'contain' },
+    { i: 'media/rotor_cad.jpg', cap: 'CAD model of the rig', cls: 'contain' }
+  ]
+};
+window.pmHTML = function (key, extra) {
+  const items = (window.PM_MEDIA || {})[key]; if (!items) return '';
+  return '<div class="pm' + (extra ? ' ' + extra : '') + '">' + items.map((m, k) => {
+    const inner = m.v
+      ? `<video muted loop playsinline preload="none" poster="${m.poster}" src="${m.v}" aria-label="${m.cap}"></video><span class="vb">VIDEO</span>`
+      : `<img src="${m.i}" alt="${m.cap}" loading="lazy">`;
+    return `<figure class="${m.cls || ''}" data-pm="${key}" data-k="${k}" tabindex="0" role="button" aria-label="Enlarge: ${m.cap}"><div class="ph">${inner}<span class="zm" aria-hidden="true">⤢</span></div><figcaption>${m.cap}</figcaption></figure>`;
+  }).join('') + '</div>';
+};
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting && !reduce) { v.play().catch(() => {}); } else { v.pause(); } }), { threshold: .35 });
+  const wire = root => root.querySelectorAll && root.querySelectorAll('.pm video:not([data-w])').forEach(v => { v.dataset.w = 1; io.observe(v); });
+  new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(n => n.nodeType === 1 && wire(n)))).observe(document.body, { childList: true, subtree: true });
+  wire(document);
+  document.querySelectorAll('[data-media]').forEach(el => { el.innerHTML = window.pmHTML(el.dataset.media, el.dataset.mediaCls); wire(el); });
+  const lb = document.getElementById('pmLb'); document.body.appendChild(lb); const body = document.getElementById('pmLbBody'), cap = document.getElementById('pmLbCap');
+  let last = null, px = 0, py = 0;
+  document.addEventListener('pointerdown', e => { px = e.clientX; py = e.clientY; }, true);
+  const open = f => {
+    const m = window.PM_MEDIA[f.dataset.pm][+f.dataset.k]; last = f;
+    body.innerHTML = m.v ? `<video controls autoplay playsinline poster="${m.poster}" src="${m.v}"></video>` : `<img src="${m.i}" alt="${m.cap}">`;
+    cap.textContent = m.cap; lb.classList.add('open'); lb.querySelector('.x').focus();
+  };
+  const close = () => { lb.classList.remove('open'); body.innerHTML = ''; if (last) last.focus(); };
+  document.addEventListener('click', e => { const f = e.target.closest('.pm figure'); if (f && Math.hypot(e.clientX - px, e.clientY - py) < 8) { e.preventDefault(); e.stopPropagation(); open(f); } }, true);
+  document.addEventListener('keydown', e => { const f = document.activeElement && document.activeElement.closest && document.activeElement.closest('.pm figure'); if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(f); } if (e.key === 'Escape' && lb.classList.contains('open')) { e.stopImmediatePropagation(); close(); } }, true);
+  lb.addEventListener('click', e => { if (e.target === lb || e.target.closest('.x')) close(); });
+})();
+</script>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = id => document.getElementById(id);
+
+  /* ---------- data ---------- */
+  const PROJ = [
+    { id: 'ur5e', wide: true, tag: 'Industrial Robotics · 11-person team', t: 'Moving-target interception with a ceiling-mounted UR5e', metric: 'sim → real · Gazebo + real UR5e', sum: 'Track an object on a conveyor, predict its crossing point and pick it up mid-motion.',
+      dl: [['problem', 'Pick up a moving object on a conveyor without belt encoders or fixed pick points.'], ['approach', 'Overhead camera tracking; least-squares fit to predict the crossing point; MoveIt 2 (RRTConnect + pick_ik) planning; Hover → Plunge → Clamp → Retreat → Drop with a Robotiq 2F-85 gripper.'], ['safety', 'Watchdog aborts if the object leaves view; paths only execute with ≥ 95% guaranteed completion.'], ['role', 'One of 11 team members; credited as a team project.']],
+      ch: ['ROS 2', 'MoveIt 2', 'Gazebo', 'ros2_control', 'URDF / Xacro'], link: 'https://github.com/MohamedHussienX/ur5e_conveyor_tracking', sch: 'arm' },
+    { id: 'cv', tag: 'Four-person team · Vision', t: 'Sports-ball classification: classical CV vs. CNN', metric: '98% CNN · 89% classical', sum: 'A hand-built pipeline against a custom CNN, on six ball classes.',
+      dl: [['test set', 'Six ball classes, 300 held-out images, same split for both approaches.'], ['classical', 'CLAHE, Hough-circle ROI, multi-channel Canny edges, HSV / LBP / HOG and shape features plus rules: 89% accuracy at 0.24 s per image.'], ['cnn', 'Custom four-block network (64→512 filters) with batch norm, dropout and augmentation: 98% accuracy at 0.023 s per image, 10× faster. Hardest class: 66% → 100% recall.']], ch: ['TensorFlow / Keras', 'Classical CV', 'Evaluation'], sch: 'cnn' },
+    { id: 'biped', tag: '12-person team · My part: A* planner', t: 'A* path planning for a bipedal wheeled robot', metric: 'A* · MATLAB simulations', sum: 'Smooth, collision-free routes a balancing robot can follow.',
+      dl: [['robot', 'A team-built, self-balancing bipedal wheeled robot.'], ['my part', 'I developed the A* path planner and all of its MATLAB simulations: a binary occupancy grid from the map, the A* shortest path, smoothing to remove the sharp turns a balancing robot can\'t follow, and reference poses exported to the trajectory team.'], ['team', 'The planning sub-team later moved to Hybrid A*, which teammates ported to embedded C on the robot\'s STM32 microcontroller.'], ['paper', 'Co-author of the team\'s paper (IEEE format, written for the course, not published).']], ch: ['A*', 'MATLAB', 'Occupancy grid', 'Path smoothing'], link: 'media/biped_paper.pdf', linkL: 'project paper (pdf)', sch: 'grid' },
+    { id: 'arm', tag: 'Robotics course · Team project', t: '4-DoF robotic arm: CAD, kinematics, simulation', metric: '4-DoF · FK / IK', sum: 'Modelled in SolidWorks, solved with DH and Newton–Raphson, checked in Simscape.',
+      dl: [['design', 'Modelled in SolidWorks around MG996R servos.'], ['kinematics', 'DH model, forward kinematics and Newton–Raphson inverse kinematics, so the gripper is sent to a point instead of a list of joint angles.'], ['sim', 'Cubic joint trajectories checked in a Simscape Multibody model of the arm.']], ch: ['SolidWorks', 'DH / FK / IK', 'Simscape', 'MATLAB'], sch: 'arm2' },
+    { id: 'rotor', tag: 'Control course · 7-person team', t: 'Twin-rotor balancing rig', metric: 'PID · Simulink · Arduino', sum: 'Two propellers hold a beam at a commanded angle.',
+      dl: [['goal', 'Hold a beam at a commanded angle using the thrust of two propellers.'], ['my part', 'Built the Simulink model of the nonlinear dynamics (beam, gravity, motors), ran the PID simulations, tested the controller on the real rig and helped assemble it.'], ['hardware', 'Two brushless motors on ESCs, a quadrature encoder read through Arduino interrupts, and a 3D-printed, laser-cut frame.'], ['result', 'In simulation, a 20° step settles with about 6% overshoot; on the rig, a 20° setpoint settled in about 10 s after tuning.']], ch: ['PID', 'Simulink', 'Arduino', 'Encoder'], sch: 'rotor' },
+  ];
+  const SCH = {"arm": "<g class=\"faint\"><path d=\"M40 8 H340\"/><path d=\"M52 8 l-7 -6\"/><path d=\"M78 8 l-7 -6\"/><path d=\"M104 8 l-7 -6\"/><path d=\"M130 8 l-7 -6\"/><path d=\"M156 8 l-7 -6\"/><path d=\"M182 8 l-7 -6\"/><path d=\"M208 8 l-7 -6\"/><path d=\"M234 8 l-7 -6\"/><path d=\"M260 8 l-7 -6\"/><path d=\"M286 8 l-7 -6\"/><path d=\"M312 8 l-7 -6\"/><path d=\"M338 8 l-7 -6\"/></g><rect x=\"168\" y=\"8\" width=\"24\" height=\"8\"/><path class=\"lk\" d=\"M180 16 V40 L236 64 L290 76\"/><circle class=\"dot\" cx=\"180\" cy=\"40\" r=\"3.5\"/><circle class=\"dot\" cx=\"236\" cy=\"64\" r=\"3.5\"/><circle class=\"dot\" cx=\"290\" cy=\"76\" r=\"3\"/><path d=\"M290 76 V84 M282 84 H298 M282 84 V93 M298 84 V93\"/><text class=\"t\" x=\"196\" y=\"32\">UR5e · ceiling-mounted</text><text class=\"tl\" x=\"300\" y=\"46\">hover → plunge → clamp → retreat → drop</text><rect class=\"m\" x=\"540\" y=\"6\" width=\"22\" height=\"12\"/><path class=\"m ds\" d=\"M543 18 L492 102 M559 18 L600 92\"/><text class=\"tm\" x=\"456\" y=\"16\">overhead camera</text><rect x=\"20\" y=\"102\" width=\"580\" height=\"12\" rx=\"6\"/><circle cx=\"26\" cy=\"108\" r=\"3.5\"/><circle cx=\"594\" cy=\"108\" r=\"3.5\"/><rect class=\"m fm\" x=\"498\" y=\"88\" width=\"14\" height=\"14\"/><rect class=\"m ds faint2\" x=\"528\" y=\"88\" width=\"14\" height=\"14\"/><rect class=\"m ds faint2\" x=\"558\" y=\"88\" width=\"14\" height=\"14\"/><circle class=\"m\" cx=\"290\" cy=\"95\" r=\"6\"/><path class=\"m\" d=\"M280 95 H300 M290 85 V105\"/><text class=\"t\" x=\"240\" y=\"132\">predicted pick point</text><path class=\"faint\" d=\"M600 124 H420 M426 120 L420 124 L426 128\"/><text class=\"t\" x=\"460\" y=\"134\">belt motion</text>", "cnn": "<rect x=\"6\" y=\"48\" width=\"44\" height=\"44\"/><circle cx=\"28\" cy=\"70\" r=\"14\"/><path d=\"M14 70 Q28 61 42 70 M28 56 Q20 70 28 84\"/><text class=\"t\" x=\"6\" y=\"42\">image</text><path class=\"faint\" d=\"M50 62 L68 34 M50 78 L68 106\"/><text class=\"t\" x=\"70\" y=\"14\">classical</text><rect x=\"70\" y=\"22\" width=\"36\" height=\"20\"/><text class=\"t\" x=\"74\" y=\"35\">CLAHE</text><path d=\"M106 32 H114\"/><rect x=\"114\" y=\"22\" width=\"66\" height=\"20\"/><text class=\"t\" x=\"118\" y=\"35\">HSV·LBP·HOG</text><path d=\"M180 32 H188\"/><rect x=\"188\" y=\"22\" width=\"34\" height=\"20\"/><text class=\"t\" x=\"193\" y=\"35\">rules</text><path d=\"M222 32 H232\"/><text class=\"tl big\" x=\"236\" y=\"38\">89%</text><text class=\"t\" x=\"270\" y=\"37\">0.24 s</text><text class=\"tm\" x=\"70\" y=\"136\">CNN 64→512</text><rect class=\"m\" x=\"70\" y=\"86\" width=\"10\" height=\"40\"/><rect class=\"m\" x=\"86\" y=\"90\" width=\"10\" height=\"32\"/><rect class=\"m\" x=\"102\" y=\"94\" width=\"10\" height=\"24\"/><rect class=\"m\" x=\"118\" y=\"98\" width=\"10\" height=\"16\"/><path class=\"faint\" d=\"M128 106 H140\"/><circle class=\"dot\" cx=\"146\" cy=\"98\" r=\"2\"/><circle class=\"dot\" cx=\"146\" cy=\"106\" r=\"2\"/><circle class=\"dot\" cx=\"146\" cy=\"114\" r=\"2\"/><path class=\"faint\" d=\"M152 106 H164\"/><rect class=\"faint\" x=\"166\" y=\"114\" width=\"6\" height=\"6\"/><rect class=\"faint\" x=\"175\" y=\"111\" width=\"6\" height=\"9\"/><rect class=\"faint\" x=\"184\" y=\"115\" width=\"6\" height=\"5\"/><rect class=\"m fm\" x=\"193\" y=\"94\" width=\"6\" height=\"26\"/><rect class=\"faint\" x=\"202\" y=\"113\" width=\"6\" height=\"7\"/><rect class=\"faint\" x=\"211\" y=\"116\" width=\"6\" height=\"4\"/><text class=\"t\" x=\"166\" y=\"134\">6 classes</text><path d=\"M222 106 H232\"/><text class=\"tl big\" x=\"236\" y=\"112\">98%</text><text class=\"t\" x=\"270\" y=\"111\">0.023 s</text>", "grid": "<g class=\"faint\"><path d=\"M10 10 H310\"/><path d=\"M10 30 H310\"/><path d=\"M10 50 H310\"/><path d=\"M10 70 H310\"/><path d=\"M10 90 H310\"/><path d=\"M10 110 H310\"/><path d=\"M10 130 H310\"/><path d=\"M10 10 V130\"/><path d=\"M30 10 V130\"/><path d=\"M50 10 V130\"/><path d=\"M70 10 V130\"/><path d=\"M90 10 V130\"/><path d=\"M110 10 V130\"/><path d=\"M130 10 V130\"/><path d=\"M150 10 V130\"/><path d=\"M170 10 V130\"/><path d=\"M190 10 V130\"/><path d=\"M210 10 V130\"/><path d=\"M230 10 V130\"/><path d=\"M250 10 V130\"/><path d=\"M270 10 V130\"/><path d=\"M290 10 V130\"/><path d=\"M310 10 V130\"/></g><rect class=\"ds faint\" x=\"84\" y=\"4\" width=\"32\" height=\"72\"/><rect class=\"ds faint\" x=\"164\" y=\"64\" width=\"52\" height=\"72\"/><rect class=\"ds faint\" x=\"224\" y=\"44\" width=\"32\" height=\"52\"/><rect class=\"ob\" x=\"90\" y=\"10\" width=\"20\" height=\"60\"/><rect class=\"ob\" x=\"170\" y=\"70\" width=\"40\" height=\"60\"/><rect class=\"ob\" x=\"230\" y=\"50\" width=\"20\" height=\"40\"/><circle class=\"ex\" cx=\"30\" cy=\"110\" r=\"1.6\"/><circle class=\"ex\" cx=\"50\" cy=\"110\" r=\"1.6\"/><circle class=\"ex\" cx=\"70\" cy=\"110\" r=\"1.6\"/><circle class=\"ex\" cx=\"30\" cy=\"90\" r=\"1.6\"/><circle class=\"ex\" cx=\"50\" cy=\"90\" r=\"1.6\"/><circle class=\"ex\" cx=\"70\" cy=\"90\" r=\"1.6\"/><circle class=\"ex\" cx=\"90\" cy=\"90\" r=\"1.6\"/><circle class=\"ex\" cx=\"110\" cy=\"90\" r=\"1.6\"/><circle class=\"ex\" cx=\"130\" cy=\"90\" r=\"1.6\"/><circle class=\"ex\" cx=\"70\" cy=\"70\" r=\"1.6\"/><circle class=\"ex\" cx=\"130\" cy=\"70\" r=\"1.6\"/><circle class=\"ex\" cx=\"150\" cy=\"70\" r=\"1.6\"/><circle class=\"ex\" cx=\"150\" cy=\"50\" r=\"1.6\"/><circle class=\"ex\" cx=\"130\" cy=\"50\" r=\"1.6\"/><circle class=\"ex\" cx=\"170\" cy=\"50\" r=\"1.6\"/><circle class=\"ex\" cx=\"190\" cy=\"50\" r=\"1.6\"/><circle class=\"ex\" cx=\"210\" cy=\"50\" r=\"1.6\"/><circle class=\"ex\" cx=\"150\" cy=\"30\" r=\"1.6\"/><circle class=\"ex\" cx=\"170\" cy=\"30\" r=\"1.6\"/><circle class=\"ex\" cx=\"190\" cy=\"30\" r=\"1.6\"/><circle class=\"ex\" cx=\"210\" cy=\"30\" r=\"1.6\"/><circle class=\"ex\" cx=\"230\" cy=\"30\" r=\"1.6\"/><circle class=\"ex\" cx=\"250\" cy=\"30\" r=\"1.6\"/><circle class=\"ex\" cx=\"270\" cy=\"30\" r=\"1.6\"/><circle class=\"ex\" cx=\"290\" cy=\"30\" r=\"1.6\"/><circle class=\"ex\" cx=\"270\" cy=\"50\" r=\"1.6\"/><circle class=\"ex\" cx=\"290\" cy=\"50\" r=\"1.6\"/><circle class=\"ex\" cx=\"130\" cy=\"110\" r=\"1.6\"/><circle class=\"ex\" cx=\"110\" cy=\"110\" r=\"1.6\"/><circle class=\"ex\" cx=\"90\" cy=\"110\" r=\"1.6\"/><circle class=\"ex\" cx=\"50\" cy=\"70\" r=\"1.6\"/><path class=\"m ds\" d=\"M30 110 H70 V90 H130 L150 70 V50 H210 V30 H290\"/><path class=\"lk\" d=\"M30 110 C 70 110, 100 92, 135 82 S 178 50, 214 42 S 268 30, 290 30\"/><circle class=\"dot\" cx=\"30\" cy=\"110\" r=\"4\"/><text class=\"tl\" x=\"18\" y=\"126\">start</text><circle class=\"m\" cx=\"290\" cy=\"30\" r=\"6\"/><text class=\"tm\" x=\"276\" y=\"20\">goal</text><text class=\"tm\" x=\"40\" y=\"84\">raw A*</text><text class=\"t\" x=\"232\" y=\"112\">inflated obstacles</text><text class=\"tl\" x=\"122\" y=\"44\">smoothed</text>", "arm2": "<path class=\"faint\" d=\"M10 128 H160\"/><rect x=\"50\" y=\"116\" width=\"40\" height=\"12\"/><path class=\"lk\" d=\"M70 116 V84 L118 52 L168 62 L182 68\"/><circle class=\"dot\" cx=\"70\" cy=\"116\" r=\"3.5\"/><circle class=\"dot\" cx=\"70\" cy=\"84\" r=\"3.5\"/><circle class=\"dot\" cx=\"118\" cy=\"52\" r=\"3.5\"/><circle class=\"dot\" cx=\"168\" cy=\"62\" r=\"3.5\"/><text class=\"t\" x=\"76\" y=\"112\">q1</text><text class=\"t\" x=\"46\" y=\"86\">q2</text><text class=\"t\" x=\"108\" y=\"42\">q3</text><text class=\"t\" x=\"164\" y=\"54\">q4</text><path class=\"ds faint\" d=\"M70 84 V60 M118 52 H146\"/><path class=\"ds\" d=\"M70 66 A18 18 0 0 1 85 74 \"/><path class=\"m\" d=\"M182 68 H196 M192 64 L196 68 L192 72\"/><path class=\"l\" d=\"M182 68 V54 M178 58 L182 54 L186 58\"/><circle class=\"m\" cx=\"214\" cy=\"108\" r=\"5\"/><path class=\"m\" d=\"M205 108 H223 M214 99 V117\"/><path class=\"m ds flow\" d=\"M182 68 C 200 72, 210 88, 214 108\"/><text class=\"tm\" x=\"168\" y=\"132\">IK target (Newton–Raphson)</text><text class=\"t\" x=\"20\" y=\"18\">DH model · FK</text><path class=\"faint\" d=\"M236 20 V80 H312\"/><path class=\"l\" d=\"M236 76 C 262 76, 286 24, 310 24\"/><text class=\"t\" x=\"240\" y=\"16\">q(t)</text><text class=\"t\" x=\"304\" y=\"94\">t</text><text class=\"tl\" x=\"248\" y=\"68\">cubic</text>", "rotor": "<path d=\"M50 128 H130 M72 128 L90 62 L108 128\"/><path class=\"lk\" d=\"M28 74 L152 46\"/><rect x=\"22\" y=\"66\" width=\"10\" height=\"8\"/><rect x=\"146\" y=\"38\" width=\"10\" height=\"8\"/><ellipse cx=\"27\" cy=\"64\" rx=\"18\" ry=\"3\"/><ellipse cx=\"151\" cy=\"36\" rx=\"18\" ry=\"3\"/><path class=\"l\" d=\"M27 60 V38 M23 43 L27 38 L31 43 M151 32 V12 M147 17 L151 12 L155 17\"/><text class=\"tl\" x=\"34\" y=\"44\">F_L</text><text class=\"tl\" x=\"158\" y=\"20\">F_R</text><circle class=\"dot\" cx=\"90\" cy=\"60\" r=\"3\"/><circle class=\"m ds\" cx=\"90\" cy=\"60\" r=\"8\"/><text class=\"tm\" x=\"100\" y=\"92\">encoder</text><path class=\"ds faint\" d=\"M90 60 H140\"/><path class=\"ds\" d=\"M126 60 A36 36 0 0 0 125 52\"/><text class=\"t\" x=\"128\" y=\"58\">θ</text><text class=\"t\" x=\"20\" y=\"120\">A2212 BLDC ×2</text><text class=\"tl\" x=\"176\" y=\"70\">PID loop · Arduino</text><text class=\"t\" x=\"168\" y=\"96\">r</text><path d=\"M176 92 H184\"/><circle cx=\"191\" cy=\"92\" r=\"7\"/><path d=\"M187 92 H195 M191 88 V96\"/><path d=\"M198 92 H204\"/><rect x=\"204\" y=\"82\" width=\"26\" height=\"20\"/><text class=\"t\" x=\"208\" y=\"95\">PID</text><path d=\"M230 92 H236\"/><rect x=\"236\" y=\"82\" width=\"46\" height=\"20\"/><text class=\"t\" x=\"240\" y=\"95\">ESC·BLDC</text><path d=\"M282 92 H288\"/><rect x=\"288\" y=\"82\" width=\"28\" height=\"20\"/><text class=\"t\" x=\"291\" y=\"95\">beam</text><path class=\"m flow ds\" d=\"M302 102 V120 H191 V99\"/><text class=\"tm\" x=\"196\" y=\"116\">θ (encoder)</text><text class=\"tm\" x=\"180\" y=\"108\">−</text>"};
+  const SCHVB = {"arm": "0 0 620 140", "cnn": "0 0 320 140", "grid": "0 0 320 140", "arm2": "0 0 320 140", "rotor": "0 0 320 140"};
+  const SCHSM = {"arm": ["0 0 320 140", "<g class=\"faint\"><path d=\"M20 8 H180\"/><path d=\"M30 8 l-7 -6\"/><path d=\"M52 8 l-7 -6\"/><path d=\"M74 8 l-7 -6\"/><path d=\"M96 8 l-7 -6\"/><path d=\"M118 8 l-7 -6\"/><path d=\"M140 8 l-7 -6\"/><path d=\"M162 8 l-7 -6\"/></g><rect x=\"68\" y=\"8\" width=\"24\" height=\"8\"/><path class=\"lk\" d=\"M80 16 V38 L118 60 L150 72\"/><circle class=\"dot\" cx=\"80\" cy=\"38\" r=\"3.5\"/><circle class=\"dot\" cx=\"118\" cy=\"60\" r=\"3.5\"/><circle class=\"dot\" cx=\"150\" cy=\"72\" r=\"3\"/><path d=\"M150 72 V80 M143 80 H157 M143 80 V88 M157 80 V88\"/><text class=\"t\" x=\"96\" y=\"30\">UR5e</text><rect class=\"m\" x=\"262\" y=\"6\" width=\"20\" height=\"11\"/><path class=\"m ds\" d=\"M265 17 L236 102 M279 17 L304 92\"/><text class=\"tm\" x=\"208\" y=\"15\">camera</text><rect x=\"10\" y=\"102\" width=\"300\" height=\"12\" rx=\"6\"/><circle cx=\"16\" cy=\"108\" r=\"3.5\"/><circle cx=\"304\" cy=\"108\" r=\"3.5\"/><rect class=\"m fm\" x=\"246\" y=\"88\" width=\"14\" height=\"14\"/><rect class=\"m ds faint2\" x=\"268\" y=\"88\" width=\"14\" height=\"14\"/><rect class=\"m ds faint2\" x=\"290\" y=\"88\" width=\"14\" height=\"14\"/><circle class=\"m\" cx=\"150\" cy=\"95\" r=\"6\"/><path class=\"m\" d=\"M140 95 H160 M150 85 V105\"/><text class=\"t\" x=\"110\" y=\"130\">pick point</text><path class=\"faint\" d=\"M300 124 H220 M226 120 L220 124 L226 128\"/><text class=\"t\" x=\"232\" y=\"136\">belt</text>"]};
+
+  /* ---------- PCB hero ---------- */
+  const cv = $('pcb'), ctx = cv.getContext('2d'), hero = cv.parentElement, chipEl = hero.querySelector('.chip');
+  let W = 1, H = 1, traces = [], pulses = [], mouse = { x: -999, y: -999 };
+  const G = 24;
+  function build() {
+    const r = hero.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    const c = chipEl.getBoundingClientRect(), box = { l: c.left - r.left - 10, r: c.right - r.left + 10, t: c.top - r.top - 10, b: c.bottom - r.top + 10 };
+    traces = []; pulses = [];
+    const n = Math.round(Math.min(70, (W * H) / 16000));
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < n; i++) {
+      const side = i % 4; let x, y, dx = 0, dy = 0;
+      if (side === 0) { x = 0; y = Math.round(rnd() * H / G) * G; dx = 1; }
+      else if (side === 1) { x = Math.round(W / G) * G; y = Math.round(rnd() * H / G) * G; dx = -1; }
+      else if (side === 2) { x = Math.round(rnd() * W / G) * G; y = 0; dy = 1; }
+      else { x = Math.round(rnd() * W / G) * G; y = Math.round(H / G) * G; dy = -1; }
+      const pts = [[x, y]]; let steps = 0, len = 0;
+      const tx = (box.l + box.r) / 2, ty = (box.t + box.b) / 2;
+      while (steps < 40) {
+        const run = (2 + Math.floor(rnd() * 6)) * G;
+        x += dx * run; y += dy * run; len += run;
+        if (x > box.l && x < box.r && y > box.t && y < box.b) { x -= dx * run; y -= dy * run; break; }
+        pts.push([x, y]);
+        if (rnd() < .5) { const ndx = Math.sign(tx - x) || 1, ndy = Math.sign(ty - y) || 1; if (dx) { dx = 0; dy = ndy; } else { dy = 0; dx = ndx; } }
+        else if (rnd() < .25) { if (dx) { dx = 0; dy = rnd() < .5 ? 1 : -1; } else { dy = 0; dx = rnd() < .5 ? 1 : -1; } }
+        steps++;
+        if (len > Math.max(W, H) * .55) break;
+      }
+      if (pts.length > 1) {
+        const segs = []; let L = 0; for (let k = 1; k < pts.length; k++) { const l = Math.abs(pts[k][0] - pts[k - 1][0]) + Math.abs(pts[k][1] - pts[k - 1][1]); segs.push(l); L += l; }
+        traces.push({ pts, segs, L, col: rnd() < .22 ? 'm' : 'c', glow: 0 });
+      }
+    }
+    for (let i = 0; i < Math.min(traces.length, 28); i++) pulses.push({ t: traces[Math.floor(rnd() * traces.length)], s: rnd(), v: .12 + rnd() * .22 });
+  }
+  function at(tr, f) { let d = f * tr.L; for (let k = 0; k < tr.segs.length; k++) { if (d <= tr.segs[k]) { const a = tr.pts[k], b = tr.pts[k + 1], q = d / tr.segs[k]; return [a[0] + (b[0] - a[0]) * q, a[1] + (b[1] - a[1]) * q]; } d -= tr.segs[k]; } return tr.pts[tr.pts.length - 1]; }
+  hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+  hero.addEventListener('pointerleave', () => { mouse.x = mouse.y = -999; });
+  function drawPCB(dt) {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(0,229,255,.07)'; for (let x = G; x < W; x += G) for (let y = G; y < H; y += G) ctx.fillRect(x - .75, y - .75, 1.5, 1.5);
+    for (const tr of traces) {
+      let near = 0; for (const p of tr.pts) { const d = Math.hypot(p[0] - mouse.x, p[1] - mouse.y); if (d < 140) near = Math.max(near, 1 - d / 140); }
+      tr.glow += (near - tr.glow) * Math.min(1, dt * 8);
+      const base = tr.col === 'm' ? '255,43,214' : '0,229,255';
+      ctx.strokeStyle = `rgba(${base},${.14 + tr.glow * .6})`; ctx.lineWidth = 1.5 + tr.glow; ctx.shadowBlur = tr.glow * 14; ctx.shadowColor = `rgb(${base})`;
+      ctx.beginPath(); tr.pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.stroke();
+      const e = tr.pts[tr.pts.length - 1]; ctx.fillStyle = `rgba(${base},${.5 + tr.glow * .5})`; ctx.fillRect(e[0] - 3, e[1] - 3, 6, 6);
+      ctx.shadowBlur = 0;
+    }
+    for (const p of pulses) {
+      p.s += p.v * dt * 600 / p.t.L; if (p.s > 1) { p.s = 0; p.t = traces[Math.floor(Math.random() * traces.length)]; }
+      const col = p.t.col === 'm' ? '255,43,214' : '198,255,61';
+      for (let k = 0; k < 8; k++) { const f = p.s - k * 0.012 * 300 / p.t.L; if (f < 0) break; const [x, y] = at(p.t, f); ctx.fillStyle = `rgba(${col},${(1 - k / 8) * .9})`; ctx.fillRect(x - 2, y - 2, 4, 4); }
+    }
+  }
+  new ResizeObserver(build).observe(hero); build();
+
+  /* ---------- decode + typing ---------- */
+  const glyphs = '01<>/\\{}[]#$%&*+=-_ABCDEFXYZ';
+  function decode(el, dur = 1100) {
+    const final = el.dataset.text; if (reduce) { el.textContent = final; return; }
+    const t0 = performance.now();
+    const step = now => { const q = Math.min(1, (now - t0) / dur); let s = ''; for (let i = 0; i < final.length; i++) s += i < q * final.length ? final[i] : glyphs[Math.floor(Math.random() * glyphs.length)]; el.textContent = s; if (q < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }
+  document.querySelectorAll('.chip .dec').forEach((el, i) => setTimeout(() => decode(el), 200 + i * 250));
+  const phrases = ['building robots that see, plan and move', 'ros2 launch ur5e_intercept · team project', 'thesis: vlm + temporal logic + reachability', 'path planning · computer vision · control'];
+  const typedEl = $('typed'); let pi = 0;
+  async function typeLoop() {
+    if (reduce) return;
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+    await sleep(2600);
+    while (true) {
+      const cur = typedEl.textContent; for (let i = cur.length; i >= 0; i--) { typedEl.textContent = cur.slice(0, i); await sleep(18); }
+      pi = (pi + 1) % phrases.length; const nx = phrases[pi];
+      for (let i = 1; i <= nx.length; i++) { typedEl.textContent = nx.slice(0, i); await sleep(42); }
+      await sleep(2400);
+    }
+  }
+  typeLoop();
+
+  /* ---------- json typed on view ---------- */
+  const JSON_HTML = [
+    '<span class="k">const</span> youssef <span class="pn">=</span> {',
+    '  degree<span class="pn">:</span> <span class="s">"B.Sc. Mechanical Eng. – Robotics &amp; Automation"</span>,',
+    '  university<span class="pn">:</span> <span class="s">"German International University, Cairo"</span>,',
+    '  thesis<span class="pn">:</span> <span class="s">"TUM Campus Heilbronn"</span>, <span class="c">// Sep 2026 – Jan 2027</span>',
+    '  gpa<span class="pn">:</span> <span class="n">0.74</span>, <span class="c">// German scale, 0.7 = best</span>',
+    '  scholarship<span class="pn">:</span> <span class="s">"DAAD"</span>,',
+    '  focus<span class="pn">:</span> [<span class="s">"manipulation"</span>, <span class="s">"planning"</span>, <span class="s">"vision"</span>, <span class="s">"control"</span>],',
+    '  languages<span class="pn">:</span> { ar<span class="pn">:</span> <span class="s">"native"</span>, en<span class="pn">:</span> <span class="s">"fluent"</span>, de<span class="pn">:</span> <span class="s">"A1"</span> },',
+    '};'
+  ];
+  const jsonEl = $('json'); jsonEl.innerHTML = JSON_HTML.join('\n');
+  let jsonDone = false;
+  function typeJSON() {
+    if (jsonDone || reduce) return; jsonDone = true; jsonEl.innerHTML = ''; let i = 0;
+    const iv = setInterval(() => { jsonEl.innerHTML = JSON_HTML.slice(0, ++i).join('\n') + (i < JSON_HTML.length ? '<span class="caret"></span>' : ''); if (i >= JSON_HTML.length) clearInterval(iv); }, 140);
+  }
+
+  /* ---------- project cards + modal ---------- */
+  const grid = $('grid');
+  PROJ.forEach((p, i) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'card rv' + (p.wide ? ' wide' : '') + (i % 3 ? ' d' + (i % 3) : '');
+    b.innerHTML = `<div class="top"><b>${String(i + 1).padStart(2, '0')}</b><span>${p.tag}</span></div><svg class="sch${SCHSM[p.sch] ? ' lg' : ''}" viewBox="${SCHVB[p.sch]}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${SCH[p.sch]}</svg>${SCHSM[p.sch] ? `<svg class="sch sm" viewBox="${SCHSM[p.sch][0]}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${SCHSM[p.sch][1]}</svg>` : ''}<h3 data-text="${p.t}">${p.t}</h3><p>${p.sum}</p><div class="metric">${p.metric}</div><span class="open">[ open spec → ]</span>`;
+    b.addEventListener('click', () => openModal(i));
+    b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top; b.style.setProperty('--mx', x + 'px'); b.style.setProperty('--my', y + 'px'); if (!reduce) b.style.transform = `perspective(900px) rotateX(${(.5 - y / r.height) * 6}deg) rotateY(${(x / r.width - .5) * 8}deg)`; });
+    b.addEventListener('pointerleave', () => { b.style.transform = ''; });
+    b.addEventListener('pointerenter', () => { const h = b.querySelector('h3'); decode(h, 500); });
+    grid.appendChild(b);
+  });
+  const modal = $('modal'), mbox = $('mbox'); let lastFocus = null;
+  function openModal(i) {
+    const p = PROJ[i]; lastFocus = document.activeElement;
+    mbox.innerHTML = `<button class="close" type="button" aria-label="Close">✕</button><div class="tag">${p.tag}</div><h3 id="mTitle">${p.t}</h3>${pmHTML(p.id)}<dl>${p.dl.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl><div class="chips">${p.ch.map(c => `<span class="chip-s">${c}</span>`).join('')}</div>${p.link ? `<a class="more" href="${p.link}" target="_blank" rel="noopener">${p.linkL || 'team repository'} ↗</a>` : ''}`;
+    modal.classList.add('open'); mbox.querySelector('.close').addEventListener('click', closeModal); mbox.querySelector('.close').focus();
+  }
+  function closeModal() { modal.classList.remove('open'); if (lastFocus) lastFocus.focus(); }
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+  /* ---------- terminal ---------- */
+  const out = $('out'), tin = $('tin');
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const CMD = {
+    help: () => '<span class="h">available commands</span>\n  about      who I am\n  projects   list builds\n  thesis     current research\n  skills     toolkit\n  exp        experience\n  contact    how to reach me\n  clear      clear the screen',
+    about: () => 'Youssef Fahmy · Mechanical Engineering – Robotics &amp; Automation (GIU Cairo)\nBachelor\'s thesis at TUM Campus Heilbronn, Sep 2026 – Jan 2027.\nGPA 0.74 (German scale) · DAAD scholarship.',
+    whoami: () => CMD.about(),
+    projects: () => PROJ.map((p, i) => `<span class="g">${String(i + 1).padStart(2, '0')}</span>  ${p.t}  <span class="o">— ${p.metric}</span>`).join('\n') + '\n<span class="o">tip: click a card above for the full spec</span>',
+    thesis: () => 'Vision-Language Model Grounded Safety Verification for Autonomous Vehicle\nNavigation Using Temporal Logic and Data-Driven Reachability Analysis\n<span class="o">camera → VLM → LTL/STL → Hamilton–Jacobi reachability → verified-safe control</span>',
+    skills: () => '<span class="h">programming</span>  Python · C (embedded) · MATLAB · SQL\n<span class="h">robotics</span>     ROS 2 (working knowledge) · A* · FK/IK · Simulink\n<span class="h">vision/ml</span>    Classical CV · TensorFlow/Keras · intro PyTorch\n<span class="h">cad</span>          SolidWorks · Fusion 360 · 3D printing',
+    exp: () => 'Sep 2026–   Bachelor\'s thesis · TUM Campus Heilbronn\nJul–Aug 26  CAPEX Procurement Intern · Beyti (Almarai Group)\nAug 2025    Aftersales Workshop Trainee · Global Auto Group / BMW Egypt\nJul–Aug 25  Engineering Intern · Lantern Ventures (B.Well)\nJul–Aug 24  Technical Trainee · Egyptian Space Agency',
+    contact: () => 'email     yousseffahmy_05@outlook.com\nphone     +49 160 1551135\nlinkedin  linkedin.com/in/youssef-fahmy-029352245',
+    sudo: a => /hire/.test(a) ? '<span class="g">permission granted.</span> ' + CMD.contact() : 'sudo: try "sudo hire youssef"',
+    ls: () => 'about  projects  thesis  skills  exp  contact',
+  };
+  function print(html) { out.insertAdjacentHTML('beforeend', html + '\n'); out.scrollTop = out.scrollHeight; }
+  function run(raw) {
+    const line = raw.trim(); if (!line) return;
+    print(`<span class="p">youssef@fahmy:~$</span> ${esc(line)}`);
+    const [c, ...rest] = line.toLowerCase().split(/\s+/);
+    if (c === 'clear') { out.innerHTML = ''; return; }
+    const f = CMD[c]; print(f ? `<span class="o">${f(rest.join(' '))}</span>` : `<span class="o">command not found: ${esc(c)} — type </span><span class="h">help</span>`);
+  }
+  $('tf').addEventListener('submit', e => { e.preventDefault(); run(tin.value); tin.value = ''; });
+  ['help', 'about', 'projects', 'thesis', 'skills', 'exp', 'contact', 'sudo hire youssef', 'clear'].forEach(c => { const b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.addEventListener('click', () => run(c)); $('cmds').appendChild(b); });
+  print('<span class="h">yf-shell v1.0</span> <span class="o">— type "help" to list commands</span>'); run('whoami');
+
+  /* ---------- thesis circuit nodes ---------- */
+  const NODES = [['INPUT', 'Camera', 'frames'], ['PERCEPTION', 'Vision-language', 'model'], ['GROUNDING', 'Temporal', 'logic · LTL/STL'], ['VERIFY', 'HJ', 'reachability'], ['OUTPUT', 'Verified-safe', 'control']];
+  const ng = $('nodes'), NS = 'http://www.w3.org/2000/svg';
+  NODES.forEach((n, i) => {
+    const x = 20 + i * 220, g = document.createElementNS(NS, 'g');
+    g.innerHTML = `<rect class="box" x="${x}" y="90" width="160" height="120"/>${[0, 1, 2, 3].map(k => `<rect class="pin" x="${x + 26 + k * 34}" y="84" width="6" height="6"/><rect class="pin" x="${x + 26 + k * 34}" y="210" width="6" height="6"/>`).join('')}<text class="bt" x="${x + 14}" y="116">${n[0]}</text><text class="bn" x="${x + 14}" y="152">${n[1]}</text><text class="bd" x="${x + 14}" y="176">${n[2]}</text>`;
+    ng.appendChild(g);
+  });
+
+  /* ---------- reveal ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('in'); io.unobserve(e.target); if (e.target.classList.contains('code')) typeJSON(); }), { threshold: .15 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+  const links = [...document.querySelectorAll('.links a')];
+  const nio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+  ['about', 'projects', 'terminal', 'thesis', 'log'].forEach(id => nio.observe($(id)));
+
+  const navEl = $('nav'); const ns = () => navEl.classList.toggle('scrolled', scrollY > 30); addEventListener('scroll', ns, { passive: true }); ns();
+  /* ---------- loop ---------- */
+  let last = performance.now(), visible = true;
+  new IntersectionObserver(es => visible = es[0].isIntersecting).observe(hero);
+  function frame(now) { const dt = Math.min(.05, (now - last) / 1000); last = now; if (visible) drawPCB(dt); requestAnimationFrame(frame); }
+  if (reduce) drawPCB(0); else requestAnimationFrame(frame);
+
+  /* ---------- clock + copy ---------- */
+  const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+  const tick = () => $('clock').textContent = fmt.format(new Date()); tick(); setInterval(tick, 1000);
+  const toast = $('toast');
+  $('copyEmail').addEventListener('click', () => {
+    const t = $('email').textContent.trim(), show = m => { toast.textContent = m; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 1800); };
+    const sel = () => { const r = document.createRange(); r.selectNodeContents($('email')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(() => show('email copied'), () => { sel(); show('selected — press ctrl+c'); }); else { sel(); show('selected — press ctrl+c'); }
+  });
+})();
+</script>
+
+</body>
+</html>
